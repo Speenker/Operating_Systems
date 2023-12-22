@@ -203,11 +203,11 @@ void funcPingAll() {
         cout << "Error: there are no processes" << endl;
     } else {
 
-        vector<int> unavailableProcs;
+        set<int> unavailableProcs;
         for (int i{0}; i < allChildrenId.size(); ++i) {
             int ProcStatus = funcPing(allChildrenId[i]);
             if(ProcStatus) {
-                unavailableProcs.push_back(ProcStatus);
+                unavailableProcs.insert(ProcStatus);
             }
         }
 
@@ -216,8 +216,8 @@ void funcPingAll() {
         } else {
 
             cout << "OK: ";
-            for (int index{0}; index < unavailableProcs.size(); ++index) {
-                cout << unavailableProcs[index] << "; ";
+            for (int const &proc : unavailableProcs) {
+                cout << proc << "; ";
             }
             cout << endl;
         } 
